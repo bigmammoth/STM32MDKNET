@@ -1,0 +1,502 @@
+FCARM FILE CONVERTER V2.57                                                              05/15/2017  23:14:34  PAGE 1
+
+
+FCARM FILE CONVERTER V2.57, INVOKED BY:
+D:\KEIL_V5\ARM\BIN\FCARM.EXE Web\ad.cgi, Web\ad.cgx, Web\buttons.cgi, Web\buttons.cgx, Web\home.png, Web\index.htm, Web\
+>> keil.gif, Web\language.cgi, Web\lcd.cgi, Web\leds.cgi, Web\llblue.jpg, Web\logo.gif, Web\network.cgi, Web\pabb.gif, W
+>> eb\pg_footer.inc, Web\pg_header.inc, Web\system.cgi, Web\tcp.cgi, Web\xml_http.js TO web.c RTE PRINT
+
+
+INPUT FILE: Web\ad.cgi
+  File type  = CGI SCRIPT
+  Input size = 2537 bytes
+  Redundancy = 259 bytes (11%)
+  Image size = 2278 bytes (89%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>AD Input</title><script language=JavaScript type="text/javascript" src="xml_http.js"></script>
+t <script language=JavaScript type="text/javascript">var formUpdate = new periodicObj("ad.cgx", 500);
+t function plotADGraph() { adVal = document.getElementById("ad_value").value; numVal = parseInt(adVal, 16);
+t  voltsVal = (3.3*numVal)/4096; tableSize = (numVal*100/4096);
+t  document.getElementById("ad_table").style.width = (tableSize + '%');
+t  document.getElementById("ad_volts").value = (voltsVal.toFixed(3) + ' V');}function periodicUpdateAd() {
+t  if(document.getElementById("adChkBox").checked == true) { updateMultiple(formUpdate,plotADGraph);
+t  ad_elTime = setTimeout(periodicUpdateAd, formUpdate.period); } else clearTimeout(ad_elTime);}</script></head>
+i pg_header.inc
+t <h2 align="center"><br>AD Converter Input</h2>
+t <p><font size="2">This page allows you to monitor AD input value in numeric
+t  and graphics form. Periodic screen update is based on <b>xml</b> technology.
+t  This results in smooth flicker-free screen update.<br><br>
+t  Turn potentiometer on an evaluation board clockwise or counterclockwise
+t  and observe the change of AD value on the screen.</font></p><form action="ad.cgi" method="post" name="ad">
+t <input type="hidden" value="ad" name="pg"><table border=0 width=99%><font size="3">
+t <tr style="background-color: #aaccff"> <th width=15%>Item</th> <th width=15%>Value</th> <th width=15%>Volts</th>
+t  <th width=55%>Bargraph</th></tr><tr><td><img src="pabb.gif">POT1:</td> <td align="center">
+t <input type="text" readonly style="background-color: transparent; border: 0px"
+c g 1 size="10" id="ad_value" value="0x%03X"></td>
+t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
+c g 2 size="10" id="ad_volts" value="%5.3f V"></td>
+t <td height=50><table bgcolor="#FFFFFF" border="2" cellpadding="0" cellspacing="0" width="100%"><tr>
+c g 3 <td><table id="ad_table" style="width: %d%%" border="0" cellpadding="0" cellspacing="0">
+t <tr><td bgcolor="#0000FF">&nbsp;</td></tr></table></td></tr></table></td></tr></font></table><p align=center>
+t <input type=button value="Refresh" onclick="updateMultiple(formUpdate,plotADGraph)">
+t Periodic:<input type="checkbox" id="adChkBox" onclick="periodicUpdateAd()"></p></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\ad.cgx
+  File type  = CGI SCRIPT
+  Input size = 92 bytes
+  Redundancy = 23 bytes (25%)
+  Image size = 69 bytes (75%)
++---------------------------------------------------------------------------------------------------------------------+
+t <form><text><id>ad_value</id>
+c x<value>0x%03X</value>
+t </text></form>
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\buttons.cgi
+  File type  = CGI SCRIPT
+  Input size = 1938 bytes
+  Redundancy = 245 bytes (13%)
+  Image size = 1693 bytes (87%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>Button inputs</title>
+t <script language=JavaScript type="text/javascript" src="xml_http.js"></script>
+t <script language=JavaScript type="text/javascript">var formUpdate = new periodicObj("buttons.cgx", 300);
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 2
+
+
+t function periodicUpdate() { if(document.getElementById("refreshChkBox").checked == true) {
+t  updateMultiple(formUpdate); periodicFormTime = setTimeout("periodicUpdate()", formUpdate.period); } else
+t  clearTimeout(periodicFormTime);}</script></head>
+i pg_header.inc
+t <h3 align="center"><br>Buttons on the board</h3>
+t <p><font size="2">This page allows you to monitor on board buttons state.
+t  Periodic screen update is based on <b>xml</b> technology. This results in smooth 
+t flicker-free screen update.<br><br>
+t  Press a button on an evaluation board and observe the change on the screen.</font></p>
+t <form action="buttons.cgi" method="post" id="form1" name="form1"><table border="0" width=99%><font size="3">
+t <tr bgcolor=#aaccff> <th width=40%>Item</th> <th width=60%>Status</th></tr><tr>
+t  <td><img src="pabb.gif">Buttons [7..0]:</td> <td align="center"> <input type="checkbox" disabled id="button7">7
+t  <input type="checkbox" disabled id="button6">6 <input type="checkbox" disabled id="button5">5
+t  <input type="checkbox" disabled id="button4">4 <input type="checkbox" disabled id="button3">3
+t  <input type="checkbox" disabled id="button2">2 <input type="checkbox" disabled id="button1">1
+t  <input type="checkbox" disabled id="button0">0 </td></tr></font></table><p align="center">
+t  <input type="button" id="refreshBtn" value="Refresh" onclick="updateMultiple(formUpdate)">
+t  Periodic:<input type="checkbox" id="refreshChkBox" onclick="periodicUpdate()"></p></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\buttons.cgx
+  File type  = CGI SCRIPT
+  Input size = 72 bytes
+  Redundancy = 32 bytes (45%)
+  Image size = 40 bytes (55%)
++---------------------------------------------------------------------------------------------------------------------+
+t <form>
+c y0
+c y1
+c y2
+c y3
+c y4
+c y5
+c y6
+c y7
+t </form>
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\home.png
+  File type  = BINARY
+  Input size = 1389 bytes
++---------------------------------------------------------------------------------------------------------------------+
+.PNG........IHDR............... e....gAMA......a....$IDATHK..mL.w..p}o.f...ed....\6u..95[......,q..S...P7Q.......B18aX.
+h..@.6.."....my(..;..{.......w=V..i..7......._./...u...V.~f...V<.W4.!I...e8..'#<z.=].'.iN...C....P(..).....H.O&.db.o..*
+nn...R_..?Z.r.@...._e.... G.....@'..C....7..w......q.N......}..s....h....~.z>E....-<.y.7.>f...#.....rP.zte........O...Q
+.z.~.K....._?t2.p....s.....:G.....H.;l...O#..Uod.....]....p-.,..Q.....1.1Q......0...E...p`......G..g.6m[3...........<#.
+......~..l...4L\.+_E%Yq....H..........r...]. ..p,A....Y..hP..A.........<J.+@G...i'%.p^-+.......%....H..c.X.-ICq.V....Y.
+.......e....b~.....n..W.......&(...,...S.......Zq.0.......({.vf.#.30M...3%...-v.{Y]....B...Q....Fe/.......{t9....n%[M..
+.......k.....].N:.qY.q<..t..q..9r.B.d.p...........hi/.z.h.0k...zM.|>..q.......u...4.ye..RM..l..WG}MF.k....,.#..i..t..q.
+!...r=..L.5..!6....-[.....&E......Y...@w.M.h.(_1.......Z..j...cR..}5Rk...1.....C..|.....>..3F^....r.q'.b..@...)..\.e.H.
+..s7.K...aX..1'..4.e........'....M.v...9.)}g.....0.R.tV..$......;.......3...S...E]..k.i.?...S.o.Z.m[.....]..^B.Z...LM.N
+.....@....uQ..@wX...+v.P..Y._............d..@.A..x....=S.oLNb....]r..)i'...h.t...........+..m=z.Y...qc..0..".~bH0.w....
+..-..m.......S...sjC.j.......^..z....G..........H..^..........P\..._RL..Qui..hu:......8.~w..../..Q2.....)..N.g'..x.v...
+{......~.H..9>..=i3..e...2........1.X.....D}nn.n...O0.........F...c.....IEND.B`.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\index.htm
+  File type  = HTML CODE
+  Input size = 3420 bytes
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 3
+
+
+  Redundancy = 1003 bytes (30%)
+  Image size = 2417 bytes (70%)
++---------------------------------------------------------------------------------------------------------------------+
+<html><head><meta name="generator" charset="gb2312" content= "HTML Tidy for Windows (vers 14 February 2006), see www.w3
+.org"><title>~~~~~~~~~~~~~~~~~~~~~~</title></head><body bgcolor="#FFFFFF" leftmargin="0" topmargin="10" marginwidth="0"
+ marginheight="0"><div align="center" style="width: 800; height: 800"><table style="border: 1px solid #000080" height="
+800" cellspacing="0" cellpadding="0" width="800"><tbody><tr bgcolor="#EEEEEE"><td style="border-bottom: 1px solid #0000
+80" valign= "center" nowrap height="76" margin="50" width="600"><h1 align="center"><font face="song" color= "#006699">~
+~~~~~~~~~~~~~~~~~~~~~</font></h1></td><td style="border-bottom: 1px solid #000080" valign = "center" nowrap height="76"
+ width="300"><a href="http://www.keil.com"><img border="0" src="keil.gif" align="left" width="151" height="47"></a></td
+></tr><tr><td colspan="5" height="400" width="805" background="llblue.jpg" style="background-repeat: repeat-y;"><div al
+ign="center"><center><table width="90%" border="0"><tbody><tr><td width="95%"><h2 align="center"><br><b><font face="son
+g" color="#003366">~~~~~~~~</font></b></h2><p align="center"><a target="_blank" href="http://www.keil.com/dd/chip/4889.
+htm"><img border="0"src="logo.gif"></a></p><center><table width="800" height="120" border="0" cellpadding="0" cellspaci
+ng="0"><tr><td align="center"><font face= "song" size = "4"><b>[ <a href="/network.cgi">~~~~~~~~</a> | <a href="/system
+.cgi">~~~~~~~~</a> | <a href="/leds.cgi">~~~~~~~~~~~~</a> | <a href="/lcd.cgi">LCD</a> | <a href="/ad.cgi">AD</a> | <a 
+href="/buttons.cgi">Button</a> | <a href="/language.cgi">~~~~</a> | <a href="/tcp.cgi">TCP~~~~~~~~</a> ]</b></font></td
+></tr></table><p><font face="song" size="2">These web pages are served from a Web server,<br> which is part of a <a hre
+f="http://www.keil.com/pack/doc/mw/Network/html/index.html" target="_blank"><b>Network Component</b></a> in <a href="ht
+tp://www2.keil.com/mdk5/" target="_blank"><b>MDK-Professional</b></a>.</font></p></center></td></tr></tbody></table></c
+enter></div></td></tr><tr><td colspan="5" height="40" width="800" background="llblue.jpg" style="background-repeat: rep
+eat-y;"><p align="center"><font face="song" size = "4"><a href="http://www.keil.com/company/copyright.asp"> Copyright</
+a> 2016-2017 <a href= "http://www.keil.com/company/">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</a> ~~~~~~~~~~~~ </font></p></td></tr
+></tbody></table></div></body></html>
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\keil.gif
+  File type  = BINARY
+  Input size = 1138 bytes
++---------------------------------------------------------------------------------------------------------------------+
+GIF89a../........~....@@@............///......```.........ooo...QQQ..........................................!.......,.
+...../....`..@`.h..lJ..+Kc...)..n.:.P8.....j'...(_.9..y..t[U..^......bki..&..xY.EG.d.}...E.m~q.xxg.mtyon...k..I...|O.4N
+{P...`K^..X...z.u...LY.....o.......z.............c.....i........n....Y.......r.....1..G........C...F.......h..q!.(Y....
+.+H..Bt..>....B....$.1..pf...R......bf.......\f.x...|4...:..P..|...S.L\$...'....4<^5...U.`....u)..\.!Mh.YO....d.....A!6
+4.....'u.......B;...I...v?..+.2...!.U.........mXr.}Y....g....'.H.....9V...X..........l~..+_..n....K..<...p.k..........>
+..p...c.b.|v....b......G8.O"....D0@.........O.{.Q.......... ....0...@@........  ...`(......K.5p!..0p..$d.....`@}.\X@..<
+`$.#. @..1P......pL(...#.P@..x(C..D`@.#....."`..2Nx...4....*....p...C.Y@}..y..Z.......%...."Hp@.b...@....`...4P....9...
+....!.....,.B.;....8..@.........@..*`...r...v2.\G..p&....d..,P.....9...n.....J#.]....W.)....`..!.._..*i.......J.P.n..`#
+....@..N...v......*..$....;.._.:.)-..t9+..'l#.<..06.....\..p..z...a.zg.!F.*..<P...$.$....o...X...*Mc..>.rf2<.#.W"...W..
+....x..<+........>.....^............}.I...p.....'..........M..$...;
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\language.cgi
+  File type  = CGI SCRIPT
+  Input size = 1077 bytes
+  Redundancy = 173 bytes (17%)
+  Image size = 904 bytes (83%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>Browser Language Preference</title></head>
+i pg_header.inc
+t <h2 align=center><br>Browser Language Preference</h2>
+t <p><font size="2">You may use this information to create <b>Multi Language</b> web pages.<br><br>
+t  The language preferences can be set in Internet Explorer via 
+t <b>Tools / Internet Options... / Languages</b> and in Mozilla Firefox via <b>Tools /
+t  Options... / Content / Languages</b>. You may change the setting in your browser
+t  and reload this page again to check.<br><br>
+t  Your browser is currently sending the following language preference:</font></p>
+t <form action=index.htm method=post name=cgi><input type=hidden value="lang" name=pg>
+t <table border=0 width=99%><font size="3"><tr bgcolor=#aaccff> <th width=40%>Item</th>
+t  <th width=60%>Setting</th></tr>
+c e <tr><td><img src=pabb.gif>Browser Language</td><td><b>%s</b> [%s]</td>
+t </tr></font></table><form>
+i pg_footer.inc
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 4
+
+
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\lcd.cgi
+  File type  = CGI SCRIPT
+  Input size = 1153 bytes
+  Redundancy = 217 bytes (19%)
+  Image size = 936 bytes (81%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>LCD Control</title></head>
+i pg_header.inc
+t <h2 align=center><br>LCD Module Control</h2>
+t <p><font size="2">This page allows you to change a message displayed on <b>LCD Module</b>.
+t  Simply enter the text which you want to display and click <b>Send</b>.<br><br>
+t  This Form uses a <b>POST</b> method to send data to a Web server.</font></p>
+t <form action=lcd.cgi method=post name=cgi><input type=hidden value="lcd" name=pg>
+t <table border=0 width=99%><font size="3"><tr bgcolor=#aaccff> <th width=40%>Item</th>
+t  <th width=60%>Setting</th></tr><tr><td><img src=pabb.gif>Line 1 Text</td>
+c f 1 <td><input type=text name=lcd1 size=20 maxlength=20 value="%s"></td></tr>
+t <tr><td><img src=pabb.gif>Line 2 Text</TD>
+c f 2 <td><input type=text name=lcd2 size=20 maxlength=20 value="%s"></td></tr>
+t </font></table><p align=center><input type=submit name=set value="Send" id="sbm"><input type=reset value="Undo">
+t </p></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\leds.cgi
+  File type  = CGI SCRIPT
+  Input size = 2221 bytes
+  Redundancy = 237 bytes (11%)
+  Image size = 1984 bytes (89%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>LED Control</title><script language=JavaScript>function AllSW(st) {
+t  for(i=0;i<document.form1.length;i++) { if(document.form1.elements[i].type=="checkbox"){
+t  document.form1.elements[i].checked=st; } } document.form1.submit();}</script></head>
+i pg_header.inc
+t <h2 align=center><br>Control LEDs on the board</h2>
+t <p><font size="2">This page shows you how to use the following http form <b>input</b> objects:
+t  <b>checkbox</b>, <b>select</b> and <b>button</b>. It uses also a simple <b>Java Script</b>
+t  function to check/uncheck all checkboxes and submit the data.<br><br>
+t  This Form uses a <b>POST</b> method to send data to a Web server.</font></p>
+t <form action=leds.cgi method=post name=form1><input type=hidden value="led" name=pg>
+t <table border=0 width=99%><font size="3"><tr bgcolor=#aaccff> <th width=40%>Item</th>
+t  <th width=60%>Setting</th></tr><td><img src=pabb.gif>LED control:</td>
+t <td><select name="ctrl" onchange="submit();">
+c b c <option %s>Browser</option><option %s>Running Lights</option></select></td></tr>
+t <tr><td><img src=pabb.gif>LED diode ports [7..0]:</td><td><table><tr valign="middle">
+c b 7 <td><input type=checkbox name=led7 OnClick="submit();" %s>7</td>
+c b 6 <td><input type=checkbox name=led6 OnClick="submit();" %s>6</td>
+c b 5 <td><input type=checkbox name=led5 OnClick="submit();" %s>5</td>
+c b 4 <td><input type=checkbox name=led4 OnClick="submit();" %s>4</td>
+t <td width="5%"></td>
+c b 3 <td><input type=checkbox name=led3 OnClick="submit();" %s>3</td>
+c b 2 <td><input type=checkbox name=led2 OnClick="submit();" %s>2</td>
+c b 1 <td><input type=checkbox name=led1 OnClick="submit();" %s>1</td>
+c b 0 <td><input type=checkbox name=led0 OnClick="submit();" %s>0</td>
+t </font></table></td></tr><tr><td><img src=pabb.gif>All LED diodes On or OFF</td>
+t <td><input type=button value="&nbsp;&nbsp;ON&nbsp;&nbsp;&nbsp;" onclick="AllSW(true)">
+t <input type=button value="&nbsp;&nbsp;OFF&nbsp;&nbsp;" onclick="AllSW(false)"></td></tr></table></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 5
+
+
+
+
+INPUT FILE: Web\llblue.jpg
+  File type  = BINARY
+  Input size = 3008 bytes
++---------------------------------------------------------------------------------------------------------------------+
+......JFIF.....`.`.....C....................................................................C..........................
+...............................................,.."............................................................}.......
+.!1A..Qa."q.2....#B...R..$3br........%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz.....................................
+.........................................................................................w.......!1..AQ.aq."2...B.....#
+3R..br...$4.%.....&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz..........................................................
+..........................?...z.....(.^.<.H.)V.:R.H..Jp.M^....-=i.....).R.4t.-..jd.P..R1@.....-H.....Zb.i..&.a....N.*YL
+.zQ..)."..Zj..Z.....<t....... .i...4...u....i....;S.Z`.O.(p.)....i............i0.:.......*u4u.P.......:R..t...=...0....
+....u4s....&1.i..F..P..-8u...y.2....GOCPP....9.)....85%CSv...:..4..Q..l.t...:......NE...hr...1z....:..5.J;.e.O.i..sHc..
+.....J....9M1M:.C...GZQ..H}H....z.R...>.N.*J<..M%..{..KN.).....K.&.~..PqR.<u..J......zT...R...N.......L.e...MSJ;...OC.)
+..U84.../ZZm:..C....i..C.9O4...t..C..O.S..!......^."...4>.i..-"...9M0u.^...%:.N.*.......Ph..2E....pi.#c.A. ..Lh..p..N.+
+.g.9i....E:..>..e<u.......C.$.....j.....M........Z.>.<.5,c..u4R@.&........*KC.Zz..Zz...q.*A.....@./Jz..........KM^..]A.
+.......(p.J:.W.8u....Jr...JQ..c..<u..A....u1~.....!....ij.<..:Si.W..(T./jE./......<.S.Zx.j@u*.S......Z`.OZ...u4ri......
+&.......:.^...(.....i).%.:....&..)0..^...)..@...)..4.S.JH.9z..-8.q@"@:....Z.......:P.i1.A.......aR...2i.....)..6.H.--..
+*.<.u.u.ZU..3.C.Jz..6...c...}(..._z.0........r.x....Ri.U....P2jJ%Q@.}.@..9.`-9.O.....@....H...8.(U....9..R..d..ZD.N...Z
+p..3O.4.p.....R ...(..u..E!....).*E....N...p.....- ..1@...M:.8.(.c..:...R3......u..+.g../......-H>.C....R.)h..*A.....Y.
+....."../Zl.-H...TT.*..........._.*Zl.8..U.4....lz....)i. .KE..B.=i.R...8.S.}i)..e.O...Zz....5 .MN.........t.-....M....
+.Hu9zSi.,h)..9.T.yR...).ZQ...yh.:R.$g.*u..A...:.W.(8...zS......H..i..9he.S'j..^*F*......R4=:.x.LS.<u..l8.....p.RS$.u..@
+H.........4(.O.)..8t..>.z.)..`:..Q....H.'jx.L....../Jb..O^.......L....&..Zu2.PP..4....@.SNZ`9.).t....R/j..^.#..N.S.X...
+.......$Zp.LSN.#A....E=.*FHy.iGJi8..:.....R.5(..R.NS.LSN.....A...5z..@zt...l}..R...=zS.Zz..c..5 ...j.PS.Ze8....sRTJjE.P
+4<t.^..i.%..S...N..M....0t.-K.....M.N.*J<.z....W..<...N.).N_.*.%.1J.zm(=jX....GJ...,D.i..c.=jM.......L.e4..S..N^.Z....y
+.0v....D..:.N...i......B..R.U(9....i..H.N.....*D5#C..i....Q"......4..%:.N.*F9zS..i.ii1.$SN..e:...H:R.cG.S.Jm8t.y.X.OS..
+'QN.e..Si..H..-6.j..%H:.t..RTG......(z.i..*4....Z.1.P:.) [.S.Jb..N^.%...=i..=z.`:.^..=>.@........8t..9z..J.{T.K.!.....M
+-IC.JQ...)...D..9zSW.(.P1. .Q...$1.....tS.JL...KH....UN.)..+.g.*..."...C(.....P:.1..-6..,...z..Zz..-..SGZu&4=.4.9...S..
+.T........Hh......N.(Q.........R/J`....T..9........).^...N.4.$..i....(p.J:...........IN.*F. .MQN.i..N.)..C..)i.JZ.4yP.N
+.M.W..<.<p)...T.I.f.pqE.,b.MJ:QEK......T.t...QK.D.)G.......3.(..kq..:.*z..p.RQEH.A.N.h....S....?.H.QPR.qJ:.E..jE.QP4<sN
+..QI..^...Z(..........>...6.*F...
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\logo.gif
+  File type  = BINARY
+  Input size = 1787 bytes
++---------------------------------------------------------------------------------------------------------------------+
+GIF89aV.A...1....k..........3........".........x.............M..k............~.......a...s.t..2.....\.........p........
+..9......{.K................................W..g......t..n.$..1..1...s.C...{.{.....x..V.....G........A..m.........n....
+.r....+........Y..m.................'..7.....L..a..^..x................................................................
+.......................................................................................................................
+.......................................................................................................................
+.......................................................................................................................
+...................................................................,....V.A........H......*\......#J.H.....3j...... C..
+I....(S.\...F.0W..I....0c...S....f..b....H.*]......V.$.!...X.j....W.N$...b.I/52,0.....p..m{....d..4bcA......L.p.!+D.. s
+$..&.~.L.....3............W....R.^........6.X$..EZ.|.c...SA..!..n."b....D.$(U\......,l.A..........ap.y.......@......Q..
+.......#...*(._........'..6....I$Q...Vha.N.....ZH.."...G$.. A*....,....M.7.......#..CuR.....hP..<Df.`.h(..}.V....6R. ,.
+Dp....... .@*L.D.F.V....g.H..iB..eQD...........G...x"..d.M8p..2.IX.......b.@...._G+.@&`Q ........L.9X....[.!q0._&...P..
+.E..*..X... ....P.`&..%A..V.t3.....=.&..v.#..-.C...*X.J..._7 ..r.r$...-0...Q.C.RX....*...i.'..@.....j.....d....f.{.....
+..i....d.....$.............f......_#..........r.Q..Z.....0..I.'A.=?.....(pa..8........"v.......`.-..4x...O. ...4...G\.g
+.?..r.....`P..|..u/.f.Bh\j..........v......2.8...]..4.F..y1^.z?X.'.[$m..tk..z.X...Q.D..].0.......\.,../.o...'...T4/...9
+ ..............x@.../.....=...........Py ....o.................h......L.............>...Z.....L....z.. ...GH.....(LaD..
+.;
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\network.cgi
+  File type  = CGI SCRIPT
+  Input size = 1579 bytes
+  Redundancy = 264 bytes (17%)
+  Image size = 1315 bytes (83%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>~~~~~~~~</title><script language=JavaScript>function changeConfirm(f){
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 6
+
+
+t  if(!confirm('~~~~~~~~~~~~~~~~~~~~~~?')) return; f.submit();}</script></head>
+i pg_header.inc
+t <h2 align=center><br>~~~~~~~~</h2><p><font size="3">~~~~~~~~~~~~~~~~~~<b>~~~~~~~~</b>~~
+t  ~~~~IP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IP~~~~~~~~~~~~~~~~~~~~~~<br><br> </font></p>
+t <form action=network.cgi method=get name=cgi><input type=hidden value="net" name=pg>
+t <table border=0 width=99%><font size="4"><tr bgcolor=#aaccff> <th width=40%>~~~~</th> <th width=60%>~~~~</th></tr>
+t <tr><td><img src=pabb.gif>IP~~~~</td>
+c a i <td><input type=text name=ip value="%s" size=18 maxlength=18></td></tr>
+t <tr><td><img src=pabb.gif>~~~~~~~~</td>
+c a m <td><input type=text name=msk value="%s" size=18 maxlength=18></td></tr>
+t <tr><td><img src=pabb.gif>~~~~~~~~</td>
+c a g <td><input type=text name=gw value="%s" size=18 maxlength=18></td></tr>
+t <tr><td><img src=pabb.gif>~~DNS~~~~~~</td>
+c a p <td><input type=text name=pdns value="%s" size=18 maxlength=18></td></tr>
+t <tr><td><img src=pabb.gif>~~DNS~~~~~~</td>
+c a s <td><input type=text name=sdns value="%s" size=18 maxlength=18></td></tr>
+t </font></table><p align=center><input type=button name=set value="~~~~" onclick="changeConfirm(this.form)">
+t <input type=reset value="~~~~~~~~"></p></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\pabb.gif
+  File type  = BINARY
+  Input size = 121 bytes
++---------------------------------------------------------------------------------------------------------------------+
+GIF89a.......................................................!.......,........@.&..Ike..d)...1ai>.v.#Ybk,w.xf....x.+W).
+.;
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\pg_footer.inc
+  File type  = HTML CODE
+  Input size = 489 bytes
+  Redundancy = 70 bytes (15%)
+  Image size = 419 bytes (85%)
++---------------------------------------------------------------------------------------------------------------------+
+</td></tr></tbody></table></font></center></div></td></tr><tr><td colSpan=5 height=40 width=800 background="llblue.jpg"
+ style="background-repeat: repeat-y;"><p align=center><font face="song" size="4"><a href="http://www.keil.com/company/c
+opyright.asp"> Copyright</a> 2016-2017 <a href="http://www.keil.com/company/">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</a> ~~~~~~~~
+~~~~ </font></p></td></tr></tbody></table></div></body></html>
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\pg_header.inc
+  File type  = HTML CODE
+  Input size = 1302 bytes
+  Redundancy = 113 bytes (9%)
+  Image size = 1189 bytes (91%)
++---------------------------------------------------------------------------------------------------------------------+
+<html><head><meta name="generator" charset="gb2312" content= "HTML Tidy for Windows (vers 14 February 2006), see www.w3
+.org"><title>~~~~~~~~~~~~~~~~~~~~~~</title></head><body bgColor=#ffffff leftMargin=0 topMargin=10 marginwidth="0" margi
+nheight="0"><div align=center style="width: 800; height: 800"><table style="border: 1px solid #000080" height=800 cellS
+pacing=0 cellPadding=0 width=800><tbody><tr bgColor=#EEEEEE><td style="border-bottom: 1px solid #000080" vAlign=center 
+noWrap height=70 margin=50 width=600><h1 align="center"><font face="song" color="#006699">~~~~~~~~~~~~~~~~~~~~~~</font>
+</h1></td><td style="border-bottom: 1px solid #000080" vAlign=center noWrap height=73 width=230><a href="http://www.kei
+l.com"><img border="0" src="keil.gif" align="left" width="151" height=47></a></td><td style="border-bottom: 1px solid #
+000080" align=center vAlign=center noWrap width=70><a href="index.htm"><img border=0 src="home.png" width=31 height=29>
+</a></td></tr><tr><td colSpan=5 height=380 width=815 vAlign=top background="llblue.jpg" style="background-repeat: repea
+t-y;"><div align=center><center><font face="song"><table width="90%" border=0 align=center><tbody><tr><td width="95%">
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\system.cgi
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 7
+
+
+  File type  = CGI SCRIPT
+  Input size = 1498 bytes
+  Redundancy = 247 bytes (17%)
+  Image size = 1251 bytes (83%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>System Settings</title><script language=JavaScript>function changeConfirm(f){
+t  if(!confirm('Are you sure you want\nto change the password?')) return; f.submit();}</script></head>
+i pg_header.inc
+t <h2 align=center><br>System Settings</h2><p><font size="2">This page allows you to change the system
+t  <b>Password</b>, for the username <b>admin</b>. Default <b>realm</b>, 
+t <b>user</b> and <b>password</b> can be set in configuraton file.<br><br>
+t  This Form uses a <b>POST</b> method to send data to a Web server.</font></p>
+t <form action=index.htm method=post name=cgi><input type=hidden value="sys" name=pg>
+t <table border=0 width=99%><font size="3"><tr bgcolor=#aaccff> <th width=40%>Item</th>
+t  <th width=60%>Setting</th></tr>
+c d 1 <tr><td><img src=pabb.gif>Authentication</TD><TD><b>%s</b></td></tr>
+t <tr><td><img src=pabb.gif>Password for user 'admin'</td>
+c d 2 <td><input type=password name=pw0 size=10 maxlength=10 value="%s"></td></tr>
+t <tr><td><img src=pabb.gif>Retype your password</td>
+c d 2 <td><input type=password name=pw2 size=10 maxlength=10 value="%s"></td></tr>
+t </font></table><p align=center><input type=button name=set value="Change" onclick="changeConfirm(this.form)">
+t <input type=reset value="Undo"></p></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\tcp.cgi
+  File type  = CGI SCRIPT
+  Input size = 776 bytes
+  Redundancy = 132 bytes (18%)
+  Image size = 644 bytes (82%)
++---------------------------------------------------------------------------------------------------------------------+
+t <html><head><title>TCP Socket Status</title><meta http-equiv="refresh" content="5"></head>
+i pg_header.inc
+t <h2 align=center><br>Tcp Socket online Status</h2><center><table border=0 width=99%><font size="3">
+t <tr bgcolor=#aaccff> <th width=12%>Socket</th> <th width=18%>State</th> <th width=12%>Port</th>
+t  <th width=12%>Timer</th> <th width=34% bgcolor=#aacc00>Remote Address</th> <th width=12% bgcolor=#aacc0>Port</th>
+t </tr>
+c c
+t </font></table><form action=tcp.cgi method=post name=form1> <table width=660> <tr><td align="center">
+t  <input type=button value="Refresh" onclick="location='/tcp.cgi'"> </td></tr></table> </center></form>
+i pg_footer.inc
+.
++---------------------------------------------------------------------------------------------------------------------+
+
+
+INPUT FILE: Web\xml_http.js
+  File type  = JAVA SCRIPT
+  Input size = 4001 bytes
+  Redundancy = 1185 bytes (30%)
+  Image size = 2816 bytes (70%)
++---------------------------------------------------------------------------------------------------------------------+
+function updateMultiple(formUpd,callBack,userName,userPassword){xmlHttp=GetXmlHttpObject();if(xmlHttp==null){alert("Xml
+Http not initialized!");return 0;}xmlHttp.onreadystatechange=responseHandler;xmlHttp.open("GET",formUpd.url,true,userNa
+me,userPassword);xmlHttp.send(null);function responseHandler(){if(xmlHttp.readyState==4){if(xmlHttp.status==200){var xm
+lDoc=xmlHttp.responseXML;if(xmlDoc==null)return 0;try{processResponse(xmlDoc);}catch(e){return 0;}if(callBack!=undefine
+d)callBack();}else if(xmlHttp.status==401)alert("Error code 401: Unauthorized");else if(xmlHttp.status==403)alert("Erro
+r code 403: Forbidden");else if(xmlHttp.status==404)alert("Error code 404: URL not found!");}}}function processResponse
+(xmlDoc){textElementArr=xmlDoc.getElementsByTagName("text");for(var i=0;i<textElementArr.length;i++){try{elId=textEleme
+ntArr[i].childNodes[0].childNodes[0].nodeValue;elValue=textElementArr[i].childNodes[1].childNodes[0].nodeValue;document
+.getElementById(elId).value=elValue;}catch(error){if(elId==undefined){continue;}else if(elValue==undefined){elValue="";
+document.getElementById(elId).value=elValue;}}}checkboxElementArr=xmlDoc.getElementsByTagName("checkbox");for(var i=0;i
+<checkboxElementArr.length;i++){try{elId=checkboxElementArr[i].childNodes[0].childNodes[0].nodeValue;elValue=checkboxEl
+ementArr[i].childNodes[1].childNodes[0].nodeValue;if(elValue.match("true"))document.getElementById(elId).checked=true;e
+FCARM FILE CONVERTER V2.57                                                            05/15/2017  23:14:34  PAGE 8
+
+
+lse document.getElementById(elId).checked=false;}catch(error){if(elId==undefined){continue;}else if(elValue==undefined)
+continue;}}selectElementArr=xmlDoc.getElementsByTagName("select");for(var i=0;i<selectElementArr.length;i++){try{elId=s
+electElementArr[i].childNodes[0].childNodes[0].nodeValue;elValue=selectElementArr[i].childNodes[1].childNodes[0].nodeVa
+lue;document.getElementById(elId).value=elValue;if(elValue.match("true"))document.getElementById(elId).selected=true;el
+se document.getElementById(elId).selected=false;}catch(error){if(elId==undefined){continue;}else if(elValue==undefined)
+{elValue="";document.getElementById(elId).value=elValue;}}}radioElementArr=xmlDoc.getElementsByTagName("radio");for(var
+ i=0;i<radioElementArr.length;i++){try{elId=radioElementArr[i].childNodes[0].childNodes[0].nodeValue;elValue=radioEleme
+ntArr[i].childNodes[1].childNodes[0].nodeValue;if(elValue.match("true"))document.getElementById(elId).checked=true;else
+ document.getElementById(elId).checked=false;}catch(error){if(elId==undefined){continue;}else if(elValue==undefined)con
+tinue;}}}function GetXmlHttpObject(){var xmlHttp=null;try{xmlHttp=new XMLHttpRequest();}catch(e){try{xmlHttp=new Active
+XObject("Msxml2.XMLHTTP");}catch(e){xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");}}return xmlHttp;}function periodicO
+bj(url,period){this.url=url;this.period=(typeof period=="undefined")?0:period;}
++---------------------------------------------------------------------------------------------------------------------+
+
+MODULE INFORMATION:
+  Number of files  = 19
+  Total input size = 29598 bytes
+  Redundant data   = 4200 bytes (15%)
+  Web image size   = 25398 bytes (85%)
+
+
+FCARM COMPLETE.  0 ERROR(s)

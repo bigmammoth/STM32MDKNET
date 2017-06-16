@@ -1,0 +1,25 @@
+[Project ID]
+Signature=UE Proj: v.1
+Unicode=1
+[Project Information]
+Use Relative Directory=1
+Relative to Project File=1
+Include Sub Directories=1
+Project TagfileW=
+Project WordfileW=
+Project TpFileW=
+FilterW=
+Create Tagfile=0
+[FilesW]
+0=flash_rw.c
+1=flash_rw.h
+2=HTTP_Server_CGI.c
+3=HTTP_Server_Error.c
+4=main.c
+5=RS485.c
+6=UDP_Socket.c
+7=web.c
+8=.\Web\
+9=.\RTE\
+[GroupFilterW]
+.\RTE\=*.h;*.hpp;*.hxx;
